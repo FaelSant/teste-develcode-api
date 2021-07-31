@@ -1,8 +1,10 @@
-import express from 'express';
-const server = express();
+import express from "express"
+import { createConnection } from "typeorm"
+import "reflect-metadata"
+import { router } from "./routes"
+createConnection()
+const server = express()
+server.use(express.json())
+server.use(router)
 
-server.get('/', (req,res) => {res.json(
-    {message: "Hello World"}
-)})
-
-server.listen(process.env.PORT || 3000 )
+server.listen(process.env.PORT || 3000)
