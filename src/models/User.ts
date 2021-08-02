@@ -15,5 +15,8 @@ class User {
 
   @Column()
   photo_url: string
+
+  @Column()
+  cloudinary_id: string
 }
 export { User }

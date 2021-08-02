@@ -6,7 +6,10 @@
   "author": "FaelSant <rafael.araujo.santos98@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "cloudinary": "^1.26.3",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "multer": "^1.4.2",
     "mysql2": "^2.2.5",
     "reflect-metadata": "^0.1.10",
     "ts-node": "^9.1.1",
@@ -14,7 +17,9 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
+    "@types/multer": "^1.4.7",
     "@types/node": "^8.0.29",
     "@types/uuid": "^8.3.1",
     "ts-node": "3.3.0",

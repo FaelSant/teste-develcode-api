@@ -1,5 +1,5 @@
 import { getRepository } from "typeorm"
 
-import { User } from "../entity/User"
+import { User } from "../models/User"
 
 export const UserRepository = getRepository(User)
