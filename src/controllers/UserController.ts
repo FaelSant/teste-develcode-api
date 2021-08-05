@@ -22,6 +22,7 @@ const UserController = {
       UserRepository.save(createdUser)
       return response.status(201).json(createdUser)
     } catch (error) {
+      console.log("Error: ", error)
       return response
         .status(500)
         .json({ message: "Houve um erro ao criar o usuário" })
@@ -68,11 +69,14 @@ const UserController = {
         cloud_name: process.env.CLOUDINARY_CLOUD_NAME
       })
       const { id } = request.params
-      const { name, age, cloudinary_id, photo_url } = request.body
-      let uploadedImage = photo_url
-      let uploadedCloudiary_id = cloudinary_id
+      const { name, age } = request.body
+      const found = await UserRepository.find({ where: { id: id } })
+
+      let uploadedImage = found[0].photo_url
+      let uploadedCloudiary_id = found[0].cloudinary_id
+
       if (request.file) {
-        await cloudinary.v2.uploader.destroy(cloudinary_id)
+        await cloudinary.v2.uploader.destroy(found[0].cloudinary_id)
         const { secure_url, public_id } = await cloudinary.v2.uploader.upload(
           request.file.path
         )
@@ -85,9 +89,11 @@ const UserController = {
         photo_url: uploadedImage,
         cloudinary_id: uploadedCloudiary_id
       })
+
       return response.status(201).json(editedUser)
     } catch (error) {
       console.log("Error:", error)
+
       return response
         .status(500)
         .json({ message: "Houve um erro ao atualizar esse usuário" })

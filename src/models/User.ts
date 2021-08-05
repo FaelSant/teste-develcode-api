@@ -11,7 +11,7 @@ class User {
   name: string
 
   @Column()
-  age: string
+  age: Date
 
   @Column()
   photo_url: string
